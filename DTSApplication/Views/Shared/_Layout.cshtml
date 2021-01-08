@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9; IE=8;" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - DTS Tool</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <title>Dedication Transitional SYSTEM</title>
+
+</head>
+<body>
+    <div>
+        <h3 style="width:100%;height:50px;text-align:left;background-color:#4b6c9e;margin-left:0px;margin-right:0px;color:white;margin-top:0px">
+            <img src="~/images/gis-logo.svg" style="height:50px;width:100px;background-color:white" />&nbsp;&nbsp;<b>DTS Application</b>
+            <table style="text-align:right;float:right;margin-right:300px;" cellspacing="0" cellpadding="0">
+                <tr class="nav navbar-nav">
+                    <td class="btn-group-vertical @IsMenuSelected("Index", "Home", "active")">
+                        @Html.ActionLink("HOME", "Index", "Home", new { page = 0 }, new { @class = "navbar-brand" })
+                    </td>
+                    <td class="btn-group-vertical @IsMenuSelected("ViewQCAssets", "Home", "active")">
+                        @Html.ActionLink("QCAsset", "ViewQCAssets", "Home", new { page = 0 }, new { @class = "navbar-brand" })
+                    </td>
+                    <td class="btn-group-vertical @IsMenuSelected("About", "Home", "active")">
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "navbar-brand" })
+                    </td>
+                    <td class="btn-group-vertical @IsMenuSelected("Contact", "Home", "active")">
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "navbar-brand" })
+                    </td>
+                    @{
+                        @helper IsMenuSelected(string actionName, string controllerName, string className)
+                        {
+                            var conname = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+                            var actname = ViewContext.RouteData.Values["action"].ToString().ToLower();
+
+                            if (conname == controllerName.ToLower() && actname == actionName.ToLower())
+                            {
+                                @className;
+                            }
+                        }
+                    }
+                </tr>
+                </table>
+                @*<ul class="nav navbar-nav" style="text-align:right;float:right;margin-right:300px">
+                <li>  @Html.ActionLink("HOME", "Index", "Home", new { page = 0 }, new { @class = "navbar-brand"})</li>
+                <li> @Html.ActionLink("QCAsset", "ViewQCAssets","Home",new { page = 0  }, new { @class = "navbar-brand" })</li>
+                <li>  @Html.ActionLink("About", "About", "Home", null, new { @class = "navbar-brand" })</li>
+                <li>  @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "navbar-brand" })</li>
+            </ul>*@
+                <b style="font-size:small;float:right;margin-right:-450px">  @Session["uname"].ToString()</b>
+        </h3>
+            @*<table style="width:1500px;text-align:center;background-color:#4b6c9e;margin-left:20px;margin-right:250px;" cellspacing="0" cellpadding="0">
+                <table align="center" style="background-color:#4b6c9e;width:1500px;"border="1";>
+                <tr class="nav navbar-nav"> 
+                    <td class="btn-group-vertical @IsMenuSelected("Index", "Home", "active")">
+                        @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "navbar-brand" })
+                    </td>
+                    <td class="btn-group-vertical @IsMenuSelected("About", "Home", "active")" style="border:2px solid; border-color: grey">
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "navbar-brand" })
+                    </td>
+                    <td class="btn-group-vertical @IsMenuSelected("Contact", "Home", "active")">
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "navbar-brand" })
+
+                    </td>
+                   
+                </tr>
+            </table>*@
+        
+    </div>
+
+    <div>
+        @RenderBody()
+
+    </div>
+
+</body>
+
+</html>

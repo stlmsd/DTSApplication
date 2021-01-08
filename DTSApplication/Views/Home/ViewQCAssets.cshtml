@@ -1,0 +1,101 @@
+﻿@*@model IEnumerable<DTSApplication.Models.Asset>*@
+@model PagedList.IPagedList<DTSApplication.Models.Asset>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "QCAssets Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/src/jquery-customselect.js"></script>
+<link href="~/src/jquery-customselect.css" rel="stylesheet" />
+<script>
+    $(function () {
+        $("#ddlJobs").customselect();
+    });
+
+</script>
+<p>
+    @using (Html.BeginForm("ViewQCAssets", "Home", FormMethod.Post))
+    {
+        <div class="jumbotron">
+            <table>
+                <tr>
+                    <td>Select JOB ID</td>
+                    <td>
+                        @Html.DropDownList("PJOBID", DTSApplication.DataAccess.JobsData.LoadJobs(), new { @class = "custom-select", id = "ddlJobs" })
+                    </td>
+                    <td><input type="submit" name="submit" value="submit" /></td>
+                </tr>
+            </table>
+        </div>
+    }
+</p>
+@if (Model != null)
+{
+<table class="tables-body" border="1" cellpadding="1" cellspacing="1">
+    <tr>
+        <th>FacilityID</th>
+        <th> MxAssetNum</th>
+        <th>System </th>
+        <th>Status</th>
+        <th>PJobID</th>
+        <th>Ownership</th>
+        <th>LastJobID </th>
+        <th>LastModifiedDate</th>
+        <th>LastModifiedBy</th>
+        <th>FeatureClassName </th>
+        <th>Updated </th>
+        <th>InServiceDate</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FacilityID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MxAssetNum)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.System)
+    </td>
+    <td>
+        @Html.DisplayFor(m => item.StatusName) &nbsp;&nbsp;(@Html.DisplayFor(m => item.Status) )
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PJobID)
+    </td>
+    <td>
+        @Html.DisplayFor(m => item.OwnershipName)&nbsp;&nbsp; (@Html.DisplayFor(m => item.Ownership))
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.LastJobID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastModifiedDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastModifiedBy)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FeatureClassName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsUpdate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateStatus)
+    </td>
+
+</tr>
+    }
+    <tr>
+        <td colspan="4" style="text-align:left">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount Total  @Model.Count  </td>
+        <td colspan="8"> @Html.PagedListPager(Model, page => Url.Action("ViewQCAssets", new { page }))</td>
+    </tr>
+
+</table>
+}

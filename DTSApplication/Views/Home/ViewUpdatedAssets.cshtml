@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DTSApplication.Models.Asset>
+
+@{
+    ViewBag.Title = "ViewUpdatedAssets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Updated Assets Details</h3>
+<p>
+  <h3>@TempData["message"] </h3>
+</p>
+<div class="row">
+@if( Model != null )
+{ 
+    <table class="tables-body" border="1" cellpadding="1" cellspacing="1">
+        <tr>
+            <th>
+               FacilityID
+            </th>
+            <th>
+               MxAssetNum
+            </th>
+            <th>
+              System
+            </th>
+            <th>
+              Ownership
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              PJobID
+            </th>
+            <th>
+              LastJobID
+            </th>
+            <th>
+               LastModifiedDate
+            </th>
+            <th>
+               LastModifiedBy
+            </th>
+            <th>
+               FeatureClassName
+            </th>
+            <th>
+               Updated
+            </th>
+            <th>
+               InServiceDate
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacilityID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MxAssetNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.System)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ownership)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PJobID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastJobID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastModifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastModifiedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeatureClassName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsUpdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateStatus)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+    </div>

@@ -1,0 +1,106 @@
+﻿@model List<DTSApplication.Models.Asset>
+@*@model PagedList.IPagedList<DTSApplication.Models.Asset>
+    @using PagedList.Mvc*@
+@{
+    ViewBag.Title = "DTS Page";
+}
+<script src="~/src/jquery-customselect.js"></script>
+<link href="~/src/jquery-customselect.css" rel="stylesheet" />
+<script>
+    $(function () {
+        $("#ddlJobs").customselect();
+
+        $("input[type='checkbox']").change(function () {
+
+            if (this.checked) {
+                $(this).val(1);
+                $(this).parents('tr').find('input[type="hidden"][name="IsUpdateID"]').val(1);
+                //  alert("checked now");
+            }
+            else {
+                $(this).val(2);
+                $(this).parents('tr').find('input[type="hidden"][name="IsUpdateID"]').val(2);
+            }
+        });
+    });
+
+
+</script>
+
+<div class="jumbotron">
+    @using (Html.BeginForm())
+    {
+        <table>
+
+            <tr>
+
+                <td>JOB ID</td>
+                <td>
+                    @Html.DropDownList("PJOBID", DTSApplication.DataAccess.JobsData.LoadJobs(), new { @class = "custom-select", id = "ddlJobs" })
+                </td>
+                <td><input type="submit" name="submit" value="submit" /></td>
+            </tr>
+
+        </table>
+    }
+    @using (Html.BeginForm())
+    {
+    <table>
+            <tr>
+                <td>Feature Name</td>
+                <td>
+                    @Html.DropDownList("FeatureName", (IEnumerable<SelectListItem>)TempData["FeatureNames"], new { @class = "custom-select", id = "ddlfeatureName" }) 
+                    @{ TempData.Keep("FeatureNames");}
+                </td>
+                <td><input type="submit" name="submit" value="submit" /></td>
+            </tr>
+        </table>
+    }
+    </div>
+
+<div class="row">
+    @if (Model != null && Model.Count >= 1)
+    {
+        <table class="tables-body" border="1" cellpadding="1" cellspacing="1" @*style="margin-left:100px"*@>
+            <thead>
+                <tr><th>SELECT</th><th>FACILITY ID</th><th>MXASSETNUM</th><th>SYSTEM</th><th>STATUS</th><th>PJOB ID</th><th>OWNERSHIP</th><th>LAST JOB ID</th><th>LAST MODIFIED DATE</th><th>LAST MODIFIED BY</th><th>Feature Name</th><th>Date Status</th></tr>
+            </thead>
+            <tbody>
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                {
+                    int i = 0;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td> @Html.CheckBox("IsInserted", true) </td>*@
+                            @*<td> @Html.CheckBoxFor(m => item.IsUpdate) </td>*@
+                            <td><input type="checkbox" name="IsUpdate" id="IsUpdate" checked="checked" value="1" /><input type="hidden" name="IsUpdateID" value="1" /></td>
+                            <td>@Html.DisplayFor(m => item.FacilityID) <input type="hidden" name="FacilityID" value="@item.FacilityID" /></td>
+                            <td>@Html.DisplayFor(m => item.MxAssetNum)<input type="hidden" name="MxAssetNum" value="@item.MxAssetNum" /></td>
+                            <td>@Html.DisplayFor(m => item.System) @*<input type="hidden" name="System" value="@item.System" />*@</td>
+                            <td>@Html.DisplayFor(m => item.Status)@*<input type="hidden" name="Status" value="@item.Status" />*@</td>
+                            <td>@Html.DisplayFor(m => item.PJobID)@*<input type="hidden" name="PJobID" value="@item.PJobID" />*@</td>
+                            <td>@Html.DisplayFor(m => item.Ownership)@*<input type="hidden" name="Ownership" value="@item.Ownership" />*@</td>
+                            <td>@Html.DisplayFor(m => item.LastJobID)@*<input type="hidden" name="LastJobID" value="@item.LastJobID" />*@</td>
+                            <td>@Html.DisplayFor(m => item.LastModifiedDate)@*<input type="hidden" name="LastModifiedDate" value="@item.LastModifiedDate" />*@</td>
+                            <td>@Html.DisplayFor(m => item.LastModifiedBy)@*<input type="hidden" name="LastModifiedBy" value="@item.LastModifiedBy" />*@</td>
+                            <td>@Html.DisplayFor(m => item.FeatureClassName) <input type="hidden" name="FeatureName" value="@item.FeatureClassName" /> </td>
+                            <td>@Html.DisplayFor(m => item.DateStatus) <input type="hidden" name="DateStatus" value="@item.DateStatus" /> </td>
+                        </tr>
+                        i++;
+                    }
+
+                    @*<tr>
+                        <td colspan="3" style="text-align:left">
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount Total  @Model.Count
+                        </td>
+                        <td colspan="8"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</td>
+                    </tr>*@
+                    <tr><td colspan="7"><input type="submit" name="submit" value="Update Ownership to MSD" /></td><td colspan="5">Reset</td></tr>
+                }
+            </tbody>
+        </table>
+    }
+   </div>
+<div class="jumbotron">
+    </div>

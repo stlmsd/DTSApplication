@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTSApplication", "DTSApplication.csproj", "{28600264-AB20-42DB-9A6A-18ECE0FAD152}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28600264-AB20-42DB-9A6A-18ECE0FAD152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28600264-AB20-42DB-9A6A-18ECE0FAD152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28600264-AB20-42DB-9A6A-18ECE0FAD152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28600264-AB20-42DB-9A6A-18ECE0FAD152}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DA8A3F9-3FBF-48A5-B60B-3335C28F6980}
+	EndGlobalSection
+EndGlobal
